@@ -190,8 +190,63 @@
       color: gold;
       font-size: 35px;
     }
+
+    .game-over-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgb(141, 225, 249);
+      border: 2px solid black;
+      padding: 20px;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    .popup-content {
+      margin: 0;
+      padding: 0;
+    }
+
+    .game-over-popup h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .game-over-popup p {
+      font-size: 18px;
+    }
+
+    .game-over-popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: var(--col1);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .ok-button {
+      font-size: 18px;
+      background-color: var(
+        --col1
+      ); /* Atur warna latar belakang sesuai kebutuhan */
+      color: black;
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px;
+      margin-top: 20px;
+    }
   </style>
   <body>
+    <div class="game-over-popup">
+      <div class="popup-content">
+        <h2>Game Over</h2>
+        <p>Sayang sekali</p>
+        <button class="ok-button" onclick="okButtonClicked()">OK</button>
+      </div>
+    </div>
     <div class="gamecontainer">
       <div class="left">
         <!-- question and answer -->
@@ -222,14 +277,14 @@
       </div>
       <div class="right">
         <div class="lifeline">
-          <div class="lifelinein">
-            <img src="images/50.png" alt="50" />
+          <div class="lifelinein" id="fiftyFifty">
+            <img src="images/5050.png" alt="50:50" />
           </div>
-          <div class="lifelinein">
-            <img src="images/friends.png" alt="50" />
+          <div class="lifelinein" id="askAudience">
+            <img src="images/friends.png" alt="Tanya Teman" />
           </div>
-          <div class="lifelinein">
-            <img src="images/telephone.png" alt="50" />
+          <div class="lifelinein" id="phoneFriend">
+            <img src="images/telephone.png" alt="Telepon Teman" />
           </div>
         </div>
         <div class="hr1"></div>
@@ -244,6 +299,7 @@
     </div>
   </body>
   <script>
+    // level 1, Random Soal
     // level 1, Random Soal
     const q1set = [
       {
@@ -261,33 +317,307 @@
         b: "Kursi",
         c: "2 Orang Manusia",
         d: "Personal computer",
-        correct: "Personal computer",
+        correct: "Kursi",
+      },
+      {
+        question: "Ada apa di ujung langit?",
+        a: "Angkasa",
+        b: "Awan",
+        c: "Planet",
+        d: "Huruf T",
+        correct: "Huruf T",
+      },
+      {
+        question:
+          "Apa yang selalu meningkat, tidak pernah turun, dan tidak pernah tetap?",
+        a: "Umur",
+        b: "Suara",
+        c: "Suhu",
+        d: "Gelombang",
+        correct: "Umur",
+      },
+      {
+        question: "Apa yang bisa terbang tanpa sayap?",
+        a: "Pesawat",
+        b: "Burung",
+        c: "Kupu - kupu",
+        d: "Jam",
+        correct: "Jam",
+      },
+    ];
+
+    // level 2, Random Soal
+    const q2set = [
+      {
+        question: "Apa yang lucu setelah 24?",
+        a: "25",
+        b: "1",
+        c: "4",
+        d: "10",
+        correct: "25",
+      },
+      {
+        question:
+          "Apa yang bisa pergi ke mana saja, tetapi tidak pernah bergerak?",
+        a: "Peta",
+        b: "Angin",
+        c: "Bayangan",
+        d: "Waktu",
+        correct: "Bayangan",
+      },
+      {
+        question: "Apa yang bisa tumbuh, tetapi tidak pernah bertambah besar?",
+        a: "Uang",
+        b: "Bunga",
+        c: "Pohon",
+        d: "Waktu",
+        correct: "Waktu",
+      },
+      {
+        question: "Apa yang selalu ada, tetapi tidak pernah bisa dilihat?",
+        a: "Kebenaran",
+        b: "Kebahagiaan",
+        c: "Kebaikan",
+        d: "Masa depan",
+        correct: "Kebenaran",
+      },
+      {
+        question:
+          "Apa yang bisa membuatmu bahagia, tetapi juga bisa membuatmu sedih?",
+        a: "Cinta",
+        b: "Harapan",
+        c: "Kesuksesan",
+        d: "Kenangan",
+        correct: "Cinta",
+      },
+    ];
+
+    // level 3, Random Soal
+    const q3set = [
+      {
+        question:
+          "Apa yang dimaksud dengan serangan zero-day dalam konteks keamanan siber?",
+        a: "Serangan yang terjadi pada pukul 12:00 tengah malam",
+        b: "Serangan yang dimulai dengan nol risiko",
+        c: "Serangan yang mengeksploitasi kerentanan perangkat lunak sebelum vendor menemukan dan memperbaikinya",
+        d: "Serangan yang hanya terjadi pada hari Minggu",
+        correct:
+          "Serangan yang mengeksploitasi kerentanan perangkat lunak sebelum vendor menemukan dan memperbaikinya",
+      },
+      {
+        question:
+          "Apakah yang dimaksud dengan deepfake dalam AI dan cybersecurity?",
+        a: "Teknik mengganti latar belakang gambar",
+        b: "Teknik menciptakan video palsu dengan menggabungkan wajah dan suara orang lain",
+        c: "Teknik mempercepat kecepatan internet",
+        d: "Teknik menyembunyikan file dalam komputer",
+        correct:
+          "Teknik menciptakan video palsu dengan menggabungkan wajah dan suara orang lain",
+      },
+      {
+        question:
+          "Apa yang dimaksud dengan Turing Test dalam konteks kecerdasan buatan?",
+        a: "Tes untuk mengukur kecepatan pemrosesan komputer",
+        b: "Tes untuk mengukur kemampuan komputer dalam mengidentifikasi virus",
+        c: "Tes untuk mengukur apakah suatu program komputer dapat meniru perilaku manusia dengan cukup baik sehingga sulit dibedakan",
+        d: "Tes untuk mengukur tingkat kecerdasan seseorang dalam menggunakan komputer",
+        correct:
+          "Tes untuk mengukur apakah suatu program komputer dapat meniru perilaku manusia dengan cukup baik sehingga sulit dibedakan",
+      },
+      {
+        question: "Apa yang dimaksud dengan firewall dalam keamanan siber?",
+        a: "Perangkat keras yang digunakan untuk memadamkan kebakaran di pusat data",
+        b: "Perangkat lunak yang digunakan untuk membatasi akses ke jaringan komputer dan melindungi dari serangan siber",
+        c: "Jaringan komputer yang menggunakan teknologi nirkabel",
+        d: "Satu-satunya jalan keluar dari internet",
+        correct:
+          "Perangkat lunak yang digunakan untuk membatasi akses ke jaringan komputer dan melindungi dari serangan siber",
+      },
+      {
+        question:
+          "Apa yang dimaksud dengan steganografi dalam konteks keamanan siber?",
+        a: "Teknik untuk mengkloning jaringan komputer",
+        b: "Teknik menyembunyikan informasi rahasia dalam gambar, audio, atau teks tanpa terlihat",
+        c: "Teknik menggabungkan dua kode sumber menjadi satu",
+        d: "Teknik mengamankan data dengan menggunakan enkripsi kuat",
+        correct:
+          "Teknik menyembunyikan informasi rahasia dalam gambar, audio, atau teks tanpa terlihat",
+      },
+    ];
+
+    // level 4, Random Soal
+    const q4set = [
+      {
+        question: "Siapakah ilmuwan terkenal yang merumuskan hukum gravitasi?",
+        a: "Galileo Galilei",
+        b: "Isaac Newton",
+        c: "Albert Einstein",
+        d: "Nikola Tesla",
+        correct: "Isaac Newton",
+      },
+      {
+        question:
+          "Apa yang merupakan elemen kimia yang paling melimpah di kerak bumi?",
+        a: "Besi",
+        b: "Oksigen",
+        c: "Silikon",
+        d: "Karbon",
+        correct: "Oksigen",
+      },
+      {
+        question:
+          "Siapa pencipta Mona Lisa, salah satu lukisan paling terkenal di dunia?",
+        a: "Vincent van Gogh",
+        b: "Pablo Picasso",
+        c: "Leonardo da Vinci",
+        d: "Michelangelo",
+        correct: "Leonardo da Vinci",
+      },
+      {
+        question: "Apa ibukota negara Australia?",
+        a: "Sydney",
+        b: "Melbourne",
+        c: "Canberra",
+        d: "Brisbane",
+        correct: "Canberra",
+      },
+      {
+        question:
+          "Apa nama planet yang terletak paling dekat dengan Matahari dalam tata surya?",
+        a: "Venus",
+        b: "Mars",
+        c: "Merkurius",
+        d: "Jupiter",
+        correct: "Merkurius",
+      },
+    ];
+
+    // level 5, Random Soal
+    const q5set = [
+      {
+        question:
+          "Apa nama ilmuwan terkenal yang dikenal sebagai Bapak Fisika Modern dan menyusun teori relativitasnya?",
+        a: "Isaac Newton",
+        b: "Albert Einstein",
+        c: "Galileo Galilei",
+        d: "Stephen Hawking",
+        correct: "Albert Einstein",
+      },
+      {
+        question:
+          "Siapakah penulis terkenal yang menciptakan karakter Sherlock Holmes dalam seri novel detektif?",
+        a: "Charles Dickens",
+        b: "Mark Twain",
+        c: "Arthur Conan Doyle",
+        d: "Agatha Christie",
+        correct: "Arthur Conan Doyle",
+      },
+      {
+        question:
+          "Manakah dari planet-planet berikut ini yang tidak memiliki satelit alami (bulan)?",
+        a: "Bumi",
+        b: "Mars",
+        c: "Jupiter",
+        d: "Saturnus",
+        correct: "Mars",
+      },
+      {
+        question:
+          "Negara manakah yang terletak di benua Afrika dan memiliki populasi terbanyak?",
+        a: "Nigeria",
+        b: "Mesir",
+        c: "Ethiopia",
+        d: "Kenya",
+        correct: "Nigeria",
+      },
+      {
+        question:
+          "Siapakah tokoh sejarah yang memimpin Revolusi Bolshevik di Rusia pada tahun 1917 dan menjadi pemimpin Soviet pertama?",
+        a: "Vladimir Putin",
+        b: "Joseph Stalin",
+        c: "Leon Trotsky",
+        d: "Vladimir Lenin",
+        correct: "Vladimir Lenin",
+      },
+    ];
+
+    // level 6, Random Soal
+    const q6set = [
+      {
+        question:
+          "Apa yang dimaksud dengan RSA dalam kriptografi, dan apa fungsi utamanya?",
+        a: "RSA adalah algoritma enkripsi simetris yang menggunakan kunci publik dan privat untuk mengamankan data",
+        b: "RSA adalah algoritma kompresi data yang mengurangi ukuran file",
+        c: "RSA adalah algoritma untuk mengukur performa jaringan komputer",
+        d: "RSA adalah algoritma untuk memecahkan kode Morse",
+        correct:
+          "RSA adalah algoritma enkripsi simetris yang menggunakan kunci publik dan privat untuk mengamankan data",
+      },
+      {
+        question:
+          "Apa perbedaan antara machine learning dan deep learning, dan mengapa deep learning dianggap lebih kuat?",
+        a: "Machine learning adalah algoritma pembelajaran yang mendalam, sedangkan deep learning adalah algoritma pembelajaran mesin biasa",
+        b: "Tidak ada perbedaan antara keduanya, hanya istilah yang berbeda",
+        c: "Machine learning menggunakan komputer kuantum, sedangkan deep learning menggunakan komputer klasik",
+        d: "Deep learning adalah subbidang machine learning yang menggunakan jaringan saraf tiruan dengan banyak lapisan (deep neural networks), yang dianggap lebih kuat karena mampu memodelkan hubungan yang sangat kompleks dalam data",
+        correct:
+          "Deep learning adalah subbidang machine learning yang menggunakan jaringan saraf tiruan dengan banyak lapisan (deep neural networks), yang dianggap lebih kuat karena mampu memodelkan hubungan yang sangat kompleks dalam data",
+      },
+      {
+        question:
+          "Apa itu quantum computing, dan bagaimana ia berbeda dari komputasi klasik?",
+        a: "Quantum computing adalah jenis komputer yang hanya menggunakan angka kuantum untuk komputasi",
+        b: "Quantum computing tidak berbeda dengan komputasi klasik, hanya lebih cepat",
+        c: "Quantum computing adalah jenis komputasi yang menggunakan sifat-sifat kuantum partikel untuk melakukan komputasi yang jauh lebih cepat dibandingkan dengan komputasi klasik",
+        d: "Quantum computing adalah metode komputasi yang hanya digunakan oleh ilmuwan fisika",
+        correct:
+          "Quantum computing adalah jenis komputasi yang menggunakan sifat-sifat kuantum partikel untuk melakukan komputasi yang jauh lebih cepat dibandingkan dengan komputasi klasik",
+      },
+      {
+        question:
+          "Apa yang dimaksud dengan cybersecurity dalam dunia informatika?",
+        a: "Cybersecurity adalah jenis permainan video online yang populer",
+        b: "Cybersecurity adalah praktik menjalankan bisnis melalui internet",
+        c: "Cybersecurity adalah bidang yang berkaitan dengan melindungi sistem komputer, jaringan, dan data dari ancaman dan serangan digital",
+        d: "Cybersecurity adalah istilah lain untuk e-commerce",
+        correct:
+          "Cybersecurity adalah bidang yang berkaitan dengan melindungi sistem komputer, jaringan, dan data dari ancaman dan serangan digital",
+      },
+      {
+        question:
+          "Apa yang dimaksud dengan Big Data dalam konteks informatika?",
+        a: "Big Data adalah jenis perangkat keras komputer yang besar",
+        b: "Big Data adalah istilah lain untuk database biasa",
+        c: "Big Data adalah istilah yang digunakan untuk data yang sangat besar, kompleks, dan sulit dikelola dengan alat tradisional",
+        d: "Big Data adalah singkatan dari Big Desktop yang merujuk pada komputer desktop berukuran besar",
+        correct:
+          "Big Data adalah istilah yang digunakan untuk data yang sangat besar, kompleks, dan sulit dikelola dengan alat tradisional",
       },
     ];
 
     const progressset = [
       {
-        id: 1,
+        id: 0,
         price: 0,
       },
       {
-        id: 2,
+        id: 1,
         price: 1000000,
       },
       {
-        id: 3,
+        id: 2,
         price: 2000000,
       },
       {
-        id: 4,
+        id: 3,
         price: 5000000,
       },
       {
-        id: 5,
+        id: 4,
         price: 10000000,
       },
       {
-        id: 6,
+        id: 5,
         price: 20000000,
       },
     ];
@@ -356,6 +686,7 @@
 
             `;
     };
+
     // Random Soal (gilang)
     const setquestionandanswer = (currentQuestion) => {
       if (currentQuestion == 1) {
@@ -364,29 +695,28 @@
         question.innerHTML = randomquestion.question;
         setallanswerscont(randomquestion);
       } else if (currentQuestion == 2) {
-        let random = Math.floor(Math.random() * q1set.length);
-        let randomquestion = q1set[random];
+        let random = Math.floor(Math.random() * q2set.length);
+        let randomquestion = q2set[random];
         question.innerHTML = randomquestion.question;
         setallanswerscont(randomquestion);
       } else if (currentQuestion == 3) {
-        let random = Math.floor(Math.random() * q1set.length);
-        let randomquestion = q1set[random];
+        let random = Math.floor(Math.random() * q3set.length);
+        let randomquestion = q3set[random];
         question.innerHTML = randomquestion.question;
-
         setallanswerscont(randomquestion);
       } else if (currentQuestion == 4) {
-        let random = Math.floor(Math.random() * q1set.length);
-        let randomquestion = q1set[random];
+        let random = Math.floor(Math.random() * q4set.length);
+        let randomquestion = q4set[random];
         question.innerHTML = randomquestion.question;
         setallanswerscont(randomquestion);
       } else if (currentQuestion == 5) {
-        let random = Math.floor(Math.random() * q1set.length);
-        let randomquestion = q1set[random];
+        let random = Math.floor(Math.random() * q5set.length);
+        let randomquestion = q5set[random];
         question.innerHTML = randomquestion.question;
         setallanswerscont(randomquestion);
       } else if (currentQuestion == 6) {
-        let random = Math.floor(Math.random() * q1set.length);
-        let randomquestion = q1set[random];
+        let random = Math.floor(Math.random() * q6set.length);
+        let randomquestion = q6set[random];
         question.innerHTML = randomquestion.question;
         setallanswerscont(randomquestion);
       }
@@ -412,33 +742,71 @@
     // kekalahan waktu (lulus)
     let timer = document.querySelector(".timer p");
     let time = 60;
-
+    const prizePool = [0, 1000000, 2000000, 5000000, 10000000, 20000000];
     const selectoption = (selectoption, answer) => {
-      // alert(selectoption + "    " + answer)
       if (selectoption == answer && time > 0) {
         currentQuestion++;
         if (currentQuestion > 6) {
           clearInterval(settimer());
-          alert("Selamat! Kamu memenangkan Rp20.000.000");
+          showGameOverPopup("Selamat! Kamu memenangkan Rp20.000.000");
           time = 0;
           return;
         }
         setactivetoprogressitem(currentQuestion);
         setquestionandanswer(currentQuestion);
-        alert("Jawaban benar");
+        let isLanjut = prompt(
+          "Jawaban benar, Apakah anda akan lanjut ke pertanyaan selanjutnya?(y/n)"
+        );
+
+        if (isLanjut == "y") {
+          // nothing
+        } else if (isLanjut == "n") {
+          alert(
+            `Selamat! Kamu membawa pulang Rp.` + prizePool[currentQuestion - 1]
+          );
+          window.location.reload();
+          return;
+        } else {
+          alert("Jawaban bukan y atau n, dianggap lanjut.");
+        }
         time = 60;
       } else if (time <= 0) {
-        alert("Waktu Habis");
+        clearInterval(settimer());
+        showGameOverPopup("Sayang sekali,Waktu Habis");
+        return;
       } else {
-        alert("Jawaban salah");
+        clearInterval(settimer());
+        showGameOverPopup("Sayang sekali,Jawaban salah");
+        return;
       }
+    };
+    let popupVisible = false;
+
+    const showGameOverPopup = (message) => {
+      clearInterval(settimer());
+      const popup = document.querySelector(".game-over-popup");
+      const pooop = document.querySelector(".popup-content p");
+      pooop.innerHTML = `${message}`;
+      popup.style.display = "block";
+      popupVisible = true;
+      currentQuestion = 0;
+    };
+
+    const okButtonClicked = () => {
+      closePopup(); // Menutup kotak notifikasi
+      popupVisible = false;
+      window.location.reload();
+    };
+    const closePopup = () => {
+      const popup = document.querySelector(".game-over-popup");
+      popup.style.display = "none";
     };
 
     const settimer = () =>
       setInterval(() => {
         if (time == 0) {
           clearInterval(settimer());
-          // alert("Time is up")
+          //   alert("Time is up")
           return;
         }
         time--;
@@ -447,6 +815,78 @@
     settimer();
 
     // Fitur 50:50, Fitur Tanya temen, Fitur telpon, andre
-    //
+    const fiftyFiftyButton = document.getElementById("fiftyFifty");
+    let fiftyFiftyUsed = false;
+    fiftyFiftyButton.addEventListener("click", () => {
+      if (fiftyFiftyUsed) {
+        alert("Anda sudah menggunakan fitur 50:50.");
+        return;
+      }
+      const correctAnswer = document.querySelector(".answerin p:hover");
+      const wrongAnswers = document.querySelectorAll(
+        `.answerin p:not(:hover) span`
+      );
+      // Randomly select two wrong answer
+      const randomIndex = Math.floor(Math.random() * wrongAnswers.length);
+      wrongAnswers[randomIndex].parentNode.style.display = "none";
+      fiftyFiftyUsed = true;
+      fiftyFiftyButton.style.opacity = 0.5;
+      fiftyFiftyButton.style.pointerEvents = "none";
+    });
+
+    const askAudienceButton = document.getElementById("askAudience");
+    let askAudienceUsed = false;
+    askAudienceButton.addEventListener("click", () => {
+      if (askAudienceUsed) {
+        alert("Anda sudah menggunakan fitur Tanya Teman.");
+        return;
+      }
+      // Simulasikan jawaban dari penonton dengan tingkat keakuratan tertentu
+      const correctAnswer = document.querySelector(".answerin p:hover");
+      const correctAnswerPercentage = 75 + Math.random() * 25; // Misalkan tingkat keakuratan adalah antara 75% hingga 100%
+      const incorrectAnswerPercentage = (100 - correctAnswerPercentage) / 3;
+      const answerPercentages = [
+        correctAnswerPercentage,
+        incorrectAnswerPercentage,
+        incorrectAnswerPercentage,
+        incorrectAnswerPercentage,
+      ];
+      // Acak urutan persentase jawaban
+      for (let i = answerPercentages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [answerPercentages[i], answerPercentages[j]] = [
+          answerPercentages[j],
+          answerPercentages[i],
+        ];
+      }
+      // Tampilkan hasil persentase jawaban
+
+      const answerOptions = document.querySelectorAll(".answer-container p");
+      answerOptions.forEach((answer, index) => {
+        answer.innerHTML = `<span>${answer.textContent}</span> ${answerPercentages[index]}%`;
+      });
+      askAudienceUsed = true;
+      askAudienceButton.style.opacity = 0.5;
+      askAudienceButton.style.pointerEvents = "none";
+    });
+
+    const phoneFriendButton = document.getElementById("phoneFriend");
+    let phoneFriendUsed = false;
+    phoneFriendButton.addEventListener("click", () => {
+      if (phoneFriendUsed) {
+        alert("Anda sudah menggunakan fitur Telepon Teman.");
+        return;
+      }
+      const correctAnswer = document.querySelector(".answerin p:hover");
+      const options = ["A.", "B.", "C.", "D."];
+      const friendResponse =
+        options[Math.floor(Math.random() * options.length)];
+      alert(
+        `Anda menelepon teman Anda, dan teman Anda berpikir jawabannya adalah ${friendResponse}`
+      );
+      phoneFriendUsed = true;
+      phoneFriendButton.style.opacity = 0.5;
+      phoneFriendButton.style.pointerEvents = "none";
+    });
   </script>
 </html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How To Be A Millionaire</title>
+  </head>
+  <!-- CSS : Dhimas -->
+  <style>
+    :root {
+      --col1: #9eabe4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .gamecontainer {
+      width: 100%;
+      height: 100vh;
+      background-color: var(--col1);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .left {
+      width: 70%;
+      height: 100%;
+      background-color: var(--col1);
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid black;
+      justify-content: center;
+    }
+
+    .question-container {
+      width: 100%;
+      /* background-color: aliceblue; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .hr {
+      width: 50%;
+      height: 3px;
+      background-color: black;
+    }
+
+    .question-container p {
+      color: black;
+      font-size: 25px;
+      width: 100%;
+      text-align: center;
+      border: 3px solid black;
+      padding: 10px 20px;
+    }
+
+    .answer-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .answer-container .answerin {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0px;
+    }
+
+    .answer-container .answerin p {
+      color: black;
+      font-size: 20px;
+      width: 100%;
+      text-align: center;
+      border: 4px solid black;
+      padding: 10px 20px;
+    }
+
+    .answer-container .answerin p span {
+      color: gold;
+    }
+
+    .answer-container .answerin p:hover {
+      background-color: rgb(201, 201, 201);
+      cursor: pointer;
+      color: var(--col1);
+    }
+
+    /* Right Section Starts here */
+    .right {
+      width: 30%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .progress {
+      width: 70%;
+      /* background-color: white; */
+      align-self: center;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .progressin {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 5px 20px;
+      /* background-color: aquamarine; */
+      margin: 5px 0px;
+      font-size: 25px;
+      color: black;
+    }
+
+    .progressin1 {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 5px 20px;
+      /* background-color: aquamarine; */
+      margin: 5px 0px;
+      font-size: 30px;
+      color: gold;
+    }
+
+    .progressin:hover,
+    .progressin1:hover,
+    .progress .active {
+      background-color: gold;
+      color: black;
+      cursor: pointers;
+    }
+
+    .hr1 {
+      width: 100%;
+      height: 3px;
+      background-color: black;
+    }
+
+    .lifeline {
+      display: flex;
+      width: 100%;
+      height: 40%;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .lifelinein {
+      width: 25%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 20px;
+    }
+
+    .lifelinein img {
+      width: 50%;
+      margin: 0px 20px;
+      object-fit: contain;
+    }
+
+    .lifelinein:hover {
+      box-shadow: 0px 0px 10px 5px white;
+      transform: scale(1.1);
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .timer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .timer p {
+      color: gold;
+      font-size: 35px;
+    }
+  </style>
+  <body>
+    <div class="gamecontainer">
+      <div class="left">
+        <!-- question and answer -->
+        <div class="timer">
+          <p>TIme Left: 1:00s</p>
+        </div>
+        <div class="question-container">
+          <div class="hr"></div>
+          <p>---</p>
+          <div class="hr"></div>
+        </div>
+        <div class="answer-container">
+          <div class="answerin">
+            <div class="hr"></div>
+            <p><span>A.</span>---</p>
+            <div class="hr"></div>
+            <p><span>B.</span>---</p>
+            <div class="hr"></div>
+          </div>
+          <div class="answerin">
+            <div class="hr"></div>
+            <p><span>C.</span>---</p>
+            <div class="hr"></div>
+            <p><span>D.</span>---</p>
+            <div class="hr"></div>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="lifeline">
+          <div class="lifelinein">
+            <img src="images/50.png" alt="50" />
+          </div>
+          <div class="lifelinein">
+            <img src="images/friends.png" alt="50" />
+          </div>
+          <div class="lifelinein">
+            <img src="images/telephone.png" alt="50" />
+          </div>
+        </div>
+        <div class="hr1"></div>
+        <div class="progress">
+          <div class="progressin1">Rp. 20 Juta</div>
+          <div class="progressin">Rp. 10 Juta</div>
+          <div class="progressin">Rp. 5 Juta</div>
+          <div class="progressin">Rp. 2 Juta</div>
+          <div class="progressin active">Rp. 1 Juta</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+
+    // level 1, Random Soal
+    const q1set = [
+      {
+        question: "PC singkatan dari?",
+        a: "Personal chat",
+        b: "Personal code",
+        c: "Personal culture",
+        d: "Personal computer",
+        correct: "Personal computer",
+      },
+      {
+        question:
+        "Jika sendiri kaki aku ada empat, kalau berdua jadi ada delapan. Siapakah aku?",
+        a: "Manusia",
+        b: "Kursi",
+        c: "2 Orang Manusia",
+        d: "Personal computer",
+        correct: "Kursi",
+      },
+      {
+        question: 
+        "Ada apa di ujung langit?",
+        a: "Angkasa",
+        b: "Awan",
+        c: "Planet",
+        d: "Huruf T",
+        correct: "Huruf T",
+      },
+      {
+        question: 
+        "Apa yang selalu meningkat, tidak pernah turun, dan tidak pernah tetap?",
+        a: "Umur",
+        b: "Suara",
+        c: "Suhu",
+        d: "Gelombang",
+        correct: "Umur",
+      },
+      {
+        question: 
+        "Apa yang bisa terbang tanpa sayap?",
+        a: "Pesawat",
+        b: "Burung",
+        c: "Kupu - kupu",
+        d: "Jam",
+        correct: "Jam",
+      },
+    ];
+
+    // level 2, Random Soal
+    const q2set = [
+      {
+        question:
+        "Apa yang memiliki banyak mata, tetapi tidak bisa melihat?",
+        a: "Peta",
+        b: "Laba - laba",
+        c: "Ulat",
+        d: "Matahari",
+        correct: "Peta",
+      },
+      {
+        question:
+        "Apa yang bisa pergi ke mana saja, tetapi tidak pernah bergerak?",
+        a: "Peta",
+        b: "Angin",
+        c: "Bayangan",
+        d: "Waktu",
+        correct: "Bayangan",
+      },
+      {
+        question: 
+        "Apa yang bisa tumbuh, tetapi tidak pernah bertambah besar?",
+        a: "Uang",
+        b: "Bunga",
+        c: "Pohon",
+        d: "Waktu",
+        correct: "Waktu",
+      },
+      {
+        question: 
+        "Apa yang selalu ada, tetapi tidak pernah bisa dilihat?",
+        a: "Kebenaran",
+        b: "Kebahagiaan",
+        c: "Kebaikan",
+        d: "Masa depan",
+        correct: "Kebenaran",
+      },
+      {
+        question: 
+        "Apa yang bisa membuatmu bahagia, tetapi juga bisa membuatmu sedih?",
+        a: "Cinta",
+        b: "Harapan",
+        c: "Kesuksesan",
+        d: "Kenangan",
+        correct: "Cinta",
+      },
+    ];
+
+    // level 3, Random Soal
+    const q3set = [
+      {
+        question:
+        "Apa yang dimaksud dengan serangan zero-day dalam konteks keamanan siber?",
+        a: "Serangan yang terjadi pada pukul 12:00 tengah malam",
+        b: "Serangan yang dimulai dengan nol risiko",
+        c: "Serangan yang mengeksploitasi kerentanan perangkat lunak sebelum vendor menemukan dan memperbaikinya",
+        d: "Serangan yang hanya terjadi pada hari Minggu",
+        correct: "Serangan yang mengeksploitasi kerentanan perangkat lunak sebelum vendor menemukan dan memperbaikinya",
+      },
+      {
+        question:
+        "Apakah yang dimaksud dengan deepfake dalam AI dan cybersecurity?",
+        a: "Teknik mengganti latar belakang gambar",
+        b: "Teknik menciptakan video palsu dengan menggabungkan wajah dan suara orang lain",
+        c: "Teknik mempercepat kecepatan internet",
+        d: "Teknik menyembunyikan file dalam komputer",
+        correct: "Teknik menciptakan video palsu dengan menggabungkan wajah dan suara orang lain",
+      },
+      {
+        question: 
+        "Apa yang dimaksud dengan Turing Test dalam konteks kecerdasan buatan?",
+        a: "Tes untuk mengukur kecepatan pemrosesan komputer",
+        b: "Tes untuk mengukur kemampuan komputer dalam mengidentifikasi virus",
+        c: "Tes untuk mengukur apakah suatu program komputer dapat meniru perilaku manusia dengan cukup baik sehingga sulit dibedakan",
+        d: "Tes untuk mengukur tingkat kecerdasan seseorang dalam menggunakan komputer",
+        correct: "Tes untuk mengukur apakah suatu program komputer dapat meniru perilaku manusia dengan cukup baik sehingga sulit dibedakan",
+      },
+      {
+        question: 
+        "Apa yang dimaksud dengan firewall dalam keamanan siber?",
+        a: "Perangkat keras yang digunakan untuk memadamkan kebakaran di pusat data",
+        b: "Perangkat lunak yang digunakan untuk membatasi akses ke jaringan komputer dan melindungi dari serangan siber",
+        c: "Jaringan komputer yang menggunakan teknologi nirkabel",
+        d: "Satu-satunya jalan keluar dari internet",
+        correct: "Perangkat lunak yang digunakan untuk membatasi akses ke jaringan komputer dan melindungi dari serangan siber",
+      },
+      {
+        question: 
+        "Apa yang dimaksud dengan steganografi dalam konteks keamanan siber?",
+        a: "Teknik untuk mengkloning jaringan komputer",
+        b: "Teknik menyembunyikan informasi rahasia dalam gambar, audio, atau teks tanpa terlihat",
+        c: "Teknik menggabungkan dua kode sumber menjadi satu",
+        d: "Teknik mengamankan data dengan menggunakan enkripsi kuat",
+        correct: "Teknik menyembunyikan informasi rahasia dalam gambar, audio, atau teks tanpa terlihat",
+      },
+    ];
+
+    // level 4, Random Soal
+    const q4set = [
+      {
+        question:
+        "Siapakah ilmuwan terkenal yang merumuskan hukum gravitasi?",
+        a: "Galileo Galilei",
+        b: "Isaac Newton",
+        c: "Albert Einstein",
+        d: "Nikola Tesla",
+        correct: "Isaac Newton",
+      },
+      {
+        question:
+        "Apa yang merupakan elemen kimia yang paling melimpah di kerak bumi?",
+        a: "Besi",
+        b: "Oksigen",
+        c: "Silikon",
+        d: "Karbon",
+        correct: "Oksigen",
+      },
+      {
+        question: 
+        "Siapa pencipta Mona Lisa, salah satu lukisan paling terkenal di dunia?",
+        a: "Vincent van Gogh",
+        b: "Pablo Picasso",
+        c: "Leonardo da Vinci",
+        d: "Michelangelo",
+        correct: "Leonardo da Vinci",
+      },
+      {
+        question: 
+        "Apa ibukota negara Australia?",
+        a: "Sydney",
+        b: "Melbourne",
+        c: "Canberra",
+        d: "Brisbane",
+        correct: "Canberra",
+      },
+      {
+        question: 
+        "Apa nama planet yang terletak paling dekat dengan Matahari dalam tata surya?",
+        a: "Venus",
+        b: "Mars",
+        c: "Merkurius",
+        d: "Jupiter",
+        correct: "Merkurius",
+      },
+    ];
+
+    // level 5, Random Soal
+    const q5set = [
+      {
+        question:
+        "Apa nama ilmuwan terkenal yang dikenal sebagai Bapak Fisika Modern dan menyusun teori relativitasnya?",
+        a: "Isaac Newton",
+        b: "Albert Einstein",
+        c: "Galileo Galilei",
+        d: "Stephen Hawking",
+        correct: "Albert Einstein",
+      },
+      {
+        question:
+        "Siapakah penulis terkenal yang menciptakan karakter Sherlock Holmes dalam seri novel detektif?",
+        a: "Charles Dickens",
+        b: "Mark Twain",
+        c: "Arthur Conan Doyle",
+        d: "Agatha Christie",
+        correct: "Arthur Conan Doyle",
+      },
+      {
+        question: 
+        "Manakah dari planet-planet berikut ini yang tidak memiliki satelit alami (bulan)?",
+        a: "Bumi",
+        b: "Mars",
+        c: "Jupiter",
+        d: "Saturnus",
+        correct: "Mars",
+      },
+      {
+        question: 
+        "Negara manakah yang terletak di benua Afrika dan memiliki populasi terbanyak?",
+        a: "Nigeria",
+        b: "Mesir",
+        c: "Ethiopia",
+        d: "Kenya",
+        correct: "Nigeria",
+      },
+      {
+        question: 
+        "Siapakah tokoh sejarah yang memimpin Revolusi Bolshevik di Rusia pada tahun 1917 dan menjadi pemimpin Soviet pertama?",
+        a: "Vladimir Putin",
+        b: "Joseph Stalin",
+        c: "Leon Trotsky",
+        d: "Vladimir Lenin",
+        correct: "Vladimir Lenin",
+      },
+    ];
+
+    // level 6, Random Soal
+    const q6set = [
+      {
+        question:
+        "Apa yang dimaksud dengan RSA dalam kriptografi, dan apa fungsi utamanya?",
+        a: "RSA adalah algoritma enkripsi simetris yang menggunakan kunci publik dan privat untuk mengamankan data",
+        b: "RSA adalah algoritma kompresi data yang mengurangi ukuran file",
+        c: "RSA adalah algoritma untuk mengukur performa jaringan komputer",
+        d: "RSA adalah algoritma untuk memecahkan kode Morse",
+        correct: "RSA adalah algoritma enkripsi simetris yang menggunakan kunci publik dan privat untuk mengamankan data",
+      },
+      {
+        question:
+        "Apa perbedaan antara machine learning dan deep learning, dan mengapa deep learning dianggap lebih kuat?",
+        a: "Machine learning adalah algoritma pembelajaran yang mendalam, sedangkan deep learning adalah algoritma pembelajaran mesin biasa",
+        b: "Tidak ada perbedaan antara keduanya, hanya istilah yang berbeda",
+        c: "Machine learning menggunakan komputer kuantum, sedangkan deep learning menggunakan komputer klasik",
+        d: "Deep learning adalah subbidang machine learning yang menggunakan jaringan saraf tiruan dengan banyak lapisan (deep neural networks), yang dianggap lebih kuat karena mampu memodelkan hubungan yang sangat kompleks dalam data",
+        correct: "Deep learning adalah subbidang machine learning yang menggunakan jaringan saraf tiruan dengan banyak lapisan (deep neural networks), yang dianggap lebih kuat karena mampu memodelkan hubungan yang sangat kompleks dalam data",
+      },
+      {
+        question: 
+        "Apa itu quantum computing, dan bagaimana ia berbeda dari komputasi klasik?",
+        a: "Quantum computing adalah jenis komputer yang hanya menggunakan angka kuantum untuk komputasi",
+        b: "Quantum computing tidak berbeda dengan komputasi klasik, hanya lebih cepat",
+        c: "Quantum computing adalah jenis komputasi yang menggunakan sifat-sifat kuantum partikel untuk melakukan komputasi yang jauh lebih cepat dibandingkan dengan komputasi klasik",
+        d: "Quantum computing adalah metode komputasi yang hanya digunakan oleh ilmuwan fisika",
+        correct: "Quantum computing adalah jenis komputasi yang menggunakan sifat-sifat kuantum partikel untuk melakukan komputasi yang jauh lebih cepat dibandingkan dengan komputasi klasik",
+      },
+      {
+        question: 
+        "Apa yang dimaksud dengan cybersecurity dalam dunia informatika?",
+        a: "Cybersecurity adalah jenis permainan video online yang populer",
+        b: "Cybersecurity adalah praktik menjalankan bisnis melalui internet",
+        c: "Cybersecurity adalah bidang yang berkaitan dengan melindungi sistem komputer, jaringan, dan data dari ancaman dan serangan digital",
+        d: "Cybersecurity adalah istilah lain untuk e-commerce",
+        correct: "Cybersecurity adalah bidang yang berkaitan dengan melindungi sistem komputer, jaringan, dan data dari ancaman dan serangan digital",
+      },
+      {
+        question: 
+        "Apa yang dimaksud dengan Big Data dalam konteks informatika?",
+        a: "Big Data adalah jenis perangkat keras komputer yang besar",
+        b: "Big Data adalah istilah lain untuk database biasa",
+        c: "Big Data adalah istilah yang digunakan untuk data yang sangat besar, kompleks, dan sulit dikelola dengan alat tradisional",
+        d: "Big Data adalah singkatan dari Big Desktop yang merujuk pada komputer desktop berukuran besar",
+        correct: "Big Data adalah istilah yang digunakan untuk data yang sangat besar, kompleks, dan sulit dikelola dengan alat tradisional",
+      },
+    ];
+
+    const progressset = [
+      {
+        id: 1,
+        price: 0,
+      },
+      {
+        id: 2,
+        price: 1000000,
+      },
+      {
+        id: 3,
+        price: 2000000,
+      },
+      {
+        id: 4,
+        price: 5000000,
+      },
+      {
+        id: 5,
+        price: 10000000,
+      },
+      {
+        id: 6,
+        price: 20000000,
+      },
+    ];
+    // Fitur Berhenti atau lanjut + kalau kalah yasudah+waktu
+    const showprogressset = (progressset) => {
+      let progressdiv = document.querySelector(".progress");
+      let progresssetdivdata = "";
+      progressset = progressset.sort((a, b) => b.price - a.price);
+
+      progressset.forEach((item, index) => {
+        if (
+          item.price == 0 ||
+          item.price == 1000000 ||
+          item.price == 2000000 ||
+          item.price == 5000000 ||
+          item.price == 10000000
+        ) {
+          item.price = item.price.toLocaleString();
+          // console.log(item.price)
+          progresssetdivdata += `
+        <div class="progressin">Rp. ${item.price}</div>`;
+        } else {
+          item.price = item.price.toLocaleString();
+          // console.log(item.price)
+          progresssetdivdata += `
+        <div class="progressin1">Rp. ${item.price}</div>`;
+        }
+      });
+
+      progressdiv.innerHTML = progresssetdivdata;
+    };
+    showprogressset(progressset);
+
+    let currentQuestion = 1;
+    let score = 0;
+
+    const question = document.querySelector(".question-container p");
+    const allanswerscont = document.querySelector(".answer-container");
+
+    //
+    const setallanswerscont = (randomquestion) => {
+      allanswerscont.innerHTML = `
+            <div class="answerin">
+                    <div class="hr"></div>
+                    <p onclick="selectoption('${randomquestion.a}','${randomquestion.correct}')">
+                        <span>A.</span> ${randomquestion.a}
+                    </p>
+                    <div class="hr"></div>
+                    <p onclick="selectoption('${randomquestion.b}','${randomquestion.correct}')">
+                        <span>B.</span> ${randomquestion.b}
+                    </p>
+                    <div class="hr"></div>
+                </div>
+
+                <div class="answerin">
+                    <div class="hr"></div>
+                    <p onclick="selectoption('${randomquestion.c}','${randomquestion.correct}')">
+                        <span>C.</span> ${randomquestion.c}
+                    </p>
+                    <div class="hr"></div>
+                    <p onclick="selectoption('${randomquestion.d}','${randomquestion.correct}')">
+                        <span>D.</span> ${randomquestion.d}
+                    </p>
+                    <div class="hr"></div>
+                </div>
+
+            `;
+    };
+    // Random Soal (gilang)
+    const setquestionandanswer = (currentQuestion) => {
+      if (currentQuestion == 1) {
+        let random = Math.floor(Math.random() * q1set.length);
+        let randomquestion = q1set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      } else if (currentQuestion == 2) {
+        let random = Math.floor(Math.random() * q2set.length);
+        let randomquestion = q2set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      } else if (currentQuestion == 3) {
+        let random = Math.floor(Math.random() * q3set.length);
+        let randomquestion = q3set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      } else if (currentQuestion == 4) {
+        let random = Math.floor(Math.random() * q4set.length);
+        let randomquestion = q4set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      } else if (currentQuestion == 5) {
+        let random = Math.floor(Math.random() * q5set.length);
+        let randomquestion = q5set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      } else if (currentQuestion == 6) {
+        let random = Math.floor(Math.random() * q6set.length);
+        let randomquestion = q6set[random];
+        question.innerHTML = randomquestion.question;
+        setallanswerscont(randomquestion);
+      }
+    };
+    setquestionandanswer(currentQuestion);
+    
+    // naikin progress
+    const setactivetoprogressitem = (currentQuestion) => {
+      let progresssetdiv = document.querySelector(".progress");
+      let progresssetdivdata = progresssetdiv.querySelectorAll("div");
+      let progresssetdivdatalength = progresssetdivdata.length;
+
+      progresssetdivdata.forEach((item) => {
+        item.classList.remove("active");
+      });
+
+      progresssetdivdata[
+        progresssetdivdatalength - currentQuestion
+      ].classList.add("active");
+    };
+    setactivetoprogressitem(currentQuestion);
+
+    // kekalahan waktu (lulus)
+    let timer = document.querySelector(".timer p");
+    let time = 60;
+
+    const selectoption = (selectoption, answer) => {
+      // alert(selectoption + "    " + answer)
+      if (selectoption == answer && time > 0) {
+        currentQuestion++;
+        if (currentQuestion > 6) {
+          clearInterval(settimer());
+          alert("Selamat! Kamu memenangkan Rp20.000.000");
+          time = 0;
+          return;
+        }
+        setactivetoprogressitem(currentQuestion);
+        setquestionandanswer(currentQuestion);
+        alert("Jawaban benar");
+        time = 60;
+      } else if (time <= 0) {
+        alert("Waktu Habis");
+      } else {
+        alert("Jawaban salah");
+      }
+    };
+
+    const settimer = () =>
+      setInterval(() => {
+        if (time == 0) {
+          clearInterval(settimer());
+          // alert("Time is up")
+          return;
+        }
+        time--;
+        timer.innerHTML = "Time Left: 00:" + time + "s";
+      }, 1000);
+    settimer();
+
+    // Fitur 50:50, Fitur Tanya temen, Fitur telpon, andre
+    //
+  </script>
+</html>
